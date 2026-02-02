@@ -3,17 +3,16 @@ This program prints stdin to the screen.
 '''
 import sys
 
-def cat(file):
+def main() -> None:
+    inp = sys.stdin.buffer
+    out = sys.stdout.buffer
+
     while True:
-        chunk = file.read(1024 * 1024)
+        chunk = inp.read(1024 * 1024)  # 1 MiB
         if not chunk:
             break
-        sys.stdout.buffer.write(chunk)
+        out.write(chunk)
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        for filename in sys.argv[1:]:
-            with open(filename, "rb") as f:
-                cat(f)
-    else:
-        cat(sys.stdin.buffer)
+    main()
+)
